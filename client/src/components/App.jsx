@@ -8,13 +8,13 @@ function App() {
     <BrowserRouter>
       <Container>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <h1>Home</h1>
           </Route>
         </Switch>
