@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-export default function Login() {
+export default function Login({ handleSetCouple }) {
   const [error, setError] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +19,9 @@ export default function Login() {
     });
 
     if (req.ok) {
-      console.log(await req.json());
       setError("");
+      handleSetCouple(await req.json());
+      history.push("/couple-page");
     } else {
       let { error } = await req.json();
       setError(error);

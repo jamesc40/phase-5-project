@@ -1,7 +1,12 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-export default function Signup() {
+export default function Signup({ handleSetCouple }) {
+  const [resErrors, setErrors] = useState([]);
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -14,15 +19,20 @@ export default function Signup() {
     });
 
     if (req.ok) {
-      console.log(await req.json());
+      setErrors([]);
+      handleSetCouple(await req.json());
+      history.push("/couple-page");
     } else {
       let { errors } = await req.json();
-      console.log(errors);
+      setErrors(errors);
     }
   };
 
   return (
     <form id="signup-form" onSubmit={handleSubmit}>
+      {resErrors && resErrors.length !== 0
+        ? resErrors.map((error, i) => <p key={i}>{error}</p>)
+        : null}
       <TextField
         variant="standard"
         name="email"

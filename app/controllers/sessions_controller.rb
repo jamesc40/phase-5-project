@@ -12,4 +12,9 @@ class SessionsController < ApplicationController
   
   end
 
+  def logout
+    session.delete :couple_id
+    head :no_content
+  end
+
 end
