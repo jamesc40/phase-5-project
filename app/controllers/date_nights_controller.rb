@@ -1,0 +1,2 @@
+class DateNightsController < ApplicationController
+end

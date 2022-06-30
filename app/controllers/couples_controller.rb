@@ -1,0 +1,3 @@
+class CouplesController < ApplicationController
+
+end

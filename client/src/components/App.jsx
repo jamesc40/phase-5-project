@@ -1,31 +1,24 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Container from "@mui/material/Container";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const getHello = async () => {
-      let req = await fetch("/hello");
-      let res = await req.json();
-      setCount(res.count);
-    };
-
-    getHello();
-  }, []);
-
   return (
     <BrowserRouter>
-      <div className="App">
+      <Container>
         <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/">
-            <h1>Page Count: {count}</h1>
+            <h1>Home</h1>
           </Route>
         </Switch>
-      </div>
+      </Container>
     </BrowserRouter>
   );
 }
