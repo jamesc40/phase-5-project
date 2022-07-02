@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 
 export default function Login({ handleSetCouple }) {
   const [error, setError] = useState("");
@@ -30,27 +28,36 @@ export default function Login({ handleSetCouple }) {
 
   return (
     <>
-      {error.length > 0 ? <p>{error}</p> : null}
       <form id="login-form" onSubmit={handleSubmit}>
-        <TextField
-          variant="standard"
-          name="username"
-          label="Username"
-          margin="normal"
-          fullWidth
-        />
-        <TextField
-          variant="standard"
-          type="password"
-          name="password"
-          label="Password"
-          margin="normal"
-          fullWidth
-        />
-        <Button variant="outlined" type="submit" sx={{ mt: 2 }}>
-          click me
-        </Button>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
+            <input
+              className="input"
+              name="email"
+              type="email"
+              placeholder="..."
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
+            <input
+              className="input"
+              name="password"
+              type="password"
+              placeholder="..."
+            />
+          </div>
+        </div>
+        <div className="control">
+          <button className="button is-link">Submit</button>
+        </div>
       </form>
+      {error.length > 0 ? (
+        <p className="mt-2 has-text-danger">{error}</p>
+      ) : null}
     </>
   );
 }

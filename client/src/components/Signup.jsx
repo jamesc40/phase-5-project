@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 
 export default function Signup({ handleSetCouple }) {
   const [resErrors, setErrors] = useState([]);
@@ -29,55 +27,64 @@ export default function Signup({ handleSetCouple }) {
   };
 
   return (
-    <form id="signup-form" onSubmit={handleSubmit}>
-      {resErrors && resErrors.length !== 0
-        ? resErrors.map((error, i) => <p key={i}>{error}</p>)
+    <>
+      <form id="signup-form" onSubmit={handleSubmit}>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
+            <input
+              className="input"
+              name="email"
+              type="email"
+              placeholder="..."
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
+            <input
+              className="input"
+              name="password"
+              type="password"
+              placeholder="..."
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Couple Name</label>
+          <div className="control">
+            <input
+              className="input"
+              name="name"
+              type="text"
+              placeholder="..."
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Couple Picture</label>
+          <div className="control">
+            <input
+              className="input"
+              name="image"
+              type="file"
+              accept="image/png, image/jpg, image/gif, image/jpeg"
+            />
+          </div>
+        </div>
+        <div className="control">
+          <button className="button is-link">Submit</button>
+        </div>
+      </form>
+
+      {resErrors && resErrors.length > 0
+        ? resErrors.map((error, i) => (
+            <p key={i} className="my-2 has-text-danger">
+              {error}
+            </p>
+          ))
         : null}
-      <TextField
-        variant="standard"
-        name="email"
-        label="Email"
-        margin="normal"
-        fullWidth
-      />
-      <TextField
-        variant="standard"
-        name="username"
-        label="Username"
-        margin="normal"
-        fullWidth
-      />
-      <TextField
-        variant="standard"
-        name="password"
-        label="Password"
-        margin="normal"
-        fullWidth
-      />
-      <TextField
-        variant="standard"
-        name="first_name"
-        label="First Name"
-        margin="normal"
-        fullWidth
-      />
-      <TextField
-        variant="standard"
-        name="last_name"
-        label="Last Name"
-        margin="normal"
-        fullWidth
-      />
-      <TextField
-        variant="standard"
-        name="couple_name"
-        label="Couple Name"
-        margin="normal"
-        fullWidth
-      />
-      <Button variant="outlined" type="submit" sx={{ mt: 2 }}>
-        click me
-      </Button>
-    </form>
+    </>
   );
 }

@@ -1,5 +1,13 @@
 class CoupleSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  include Rails.application.routes.url_helpers
 
-  #has_many :date_nights
+  attributes :id, :name, :image, :completed_dates
+
+  has_many :date_nights
+  #has_many :events
+
+  def image 
+    rails_blob_path(object.image, only_path: true) if object.image.attached?
+  end
+
 end

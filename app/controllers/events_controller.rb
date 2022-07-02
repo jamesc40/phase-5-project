@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    event = Event.find(params[:id])
+    event = Event.get_random_event
     render json: event
   end
 end

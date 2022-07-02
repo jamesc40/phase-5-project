@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
   def create
-    couple = Couple.find_by(name: params[:couple_name])  
-    user = if couple 
-            couple.users.create!(user_params) 
-           else 
-             couple = Couple.create!(name: params[:couple_name]) unless couple
-             couple.users.create!(user_params) 
-           end
-    
+    couple = Couple.find_by(name: params[:name]) || 
+      Couple.create!(couple_params)
+
+    user = couple.users.create!(user_params) 
     session[:couple_id] = user.couple.id
-    render json: user.couple
+    render json: user.couple, include: ['date_nights.event']
   end
 
   private
 
   def user_params
-    params.permit(:email, :username, :password, :first_name, :last_name)
+    params.permit(:email, :password)
+  end
+
+  def couple_params
+    params.permit(:name, :image)
   end
 end
