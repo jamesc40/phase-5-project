@@ -1,5 +1,52 @@
-#couple-page-image,
+#couple-page-image {
+  width: auto;
+  /*height: 748px;*/
+  /*height: 486px;*/
+}
 #event-page-image {
   width: auto;
-  height: 748px;
+  max-height: 486px;
+}
+.leaderboard-images {
+  max-width: 128px;
+  width: auto;
+  height: 128px;
+  border-radius: 50%;
+}
+
+.rating {
+  /*display: flex;*/
+  /*justify-content: center;*/
+  width: 240px;
+  margin: auto;
+  font-size: 45px;
+  overflow: hidden;
+}
+
+.rating input {
+  float: right;
+  opacity: 0;
+  position: absolute;
+}
+
+.rating a,
+.rating label {
+  float: right;
+  color: #aaa;
+  text-decoration: none;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+  -o-transition: color 0.4s;
+  transition: color 0.4s;
+}
+
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a {
+  color: orange;
+  cursor: pointer;
 }

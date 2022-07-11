@@ -18,6 +18,7 @@ export default function Signup({ handleSetCouple }) {
 
     if (req.ok) {
       setErrors([]);
+      localStorage.setItem("loggedIn", JSON.stringify(true));
       handleSetCouple(await req.json());
       history.push("/couple-page");
     } else {
@@ -62,19 +63,33 @@ export default function Signup({ handleSetCouple }) {
             />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Couple Picture</label>
-          <div className="control">
-            <input
-              className="input"
-              name="image"
-              type="file"
-              accept="image/png, image/jpg, image/gif, image/jpeg"
-            />
-          </div>
+        {/*<div className="field">*/}
+        {/*<label className="label">Couple Picture</label>*/}
+        {/*<div className="control">*/}
+        {/*<input*/}
+        {/*className="input"*/}
+        {/*name="image"*/}
+        {/*type="file"*/}
+        {/*accept="image/png, image/jpg, image/gif, image/jpeg"*/}
+        {/*/>*/}
+        {/*</div>*/}
+        {/*</div>*/}
+        <div className="file has-name is-fullwidth mb-3">
+          <label className="file-label">
+            <input className="file-input" type="file" name="image" />
+            <span className="file-cta">
+              <span className="file-icon">
+                <i className="fas fa-upload"></i>
+              </span>
+              <span className="file-label">Choose a file…</span>
+            </span>
+            <span className="file-name">Couple Picture goes here cuh</span>
+          </label>
         </div>
         <div className="control">
-          <button className="button is-link">Submit</button>
+          <button type="submit" className="button is-link">
+            Submit
+          </button>
         </div>
       </form>
 

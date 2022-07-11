@@ -18,6 +18,7 @@ export default function Login({ handleSetCouple }) {
 
     if (req.ok) {
       setError("");
+      localStorage.setItem("loggedIn", JSON.stringify(true));
       handleSetCouple(await req.json());
       history.push("/couple-page");
     } else {
@@ -52,7 +53,9 @@ export default function Login({ handleSetCouple }) {
           </div>
         </div>
         <div className="control">
-          <button className="button is-link">Submit</button>
+          <button type="submit" className="button is-link">
+            Submit
+          </button>
         </div>
       </form>
       {error.length > 0 ? (

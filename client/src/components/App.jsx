@@ -1,18 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
+import Leaderboard from "./Leaderboard";
 import Login from "./Login";
 import Signup from "./Signup";
 import CouplePage from "./CouplePage";
 import EventPage from "./EventPage";
+import Footer from "./Footer";
+
+const WEATHER_URL =
+  "https://dark-sky.p.rapidapi.com/40.730610,-73.935242?exclude=minutely%2C%20flags&units=auto&lang=en";
 
 function App() {
   const [couple, setCouple] = useState({});
-  const count = useRef(0);
+  const [weather, setWeather] = useState({});
 
   useEffect(() => {
-    count.current++;
-    //console.log(count.current);
+    let loggedIn = localStorage.getItem("loggedIn");
+    if (!loggedIn) return;
+
     const getCouple = async () => {
       let req = await fetch("/validate-couple");
 
@@ -21,18 +27,53 @@ function App() {
         setCouple(res);
       }
     };
+
     getCouple();
+    //getWeather();
   }, []);
 
   const handleSetCouple = (fetchedCouple) => setCouple(fetchedCouple);
-  const handleLogout = () => setCouple({});
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setCouple({});
+  };
+
+  const handleHasBeen = (leaderboardPosition) => {
+    couple.completed_dates++;
+
+    setCouple({
+      ...couple,
+      leaderboard_position: leaderboardPosition,
+    });
+  };
+
+  const getWeather = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "1a3496aaadmshabfa4a975ae0e2dp180475jsnebf0df94f89f",
+        "X-RapidAPI-Host": "dark-sky.p.rapidapi.com",
+      },
+    };
+
+    let req = await fetch(WEATHER_URL, options);
+    let res = await req.json();
+    //console.log(res);
+
+    try {
+      setWeather(res.currently);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <BrowserRouter>
       <Navbar
-        image={couple.image ? couple.image : null}
         isLoggedin={Object.keys(couple).length !== 0}
         handleLogout={handleLogout}
+        weather={weather}
       />
       <div className="container">
         <Switch>
@@ -40,12 +81,15 @@ function App() {
             <EventPage />
           </Route>
           <Route exact path="/couple-page">
-            <CouplePage couple={couple} />
+            <CouplePage couple={couple} handleHasBeen={handleHasBeen} />
           </Route>
-          <Route exact path="/login">
+          <Route exact path="/leaderboard-page">
+            <Leaderboard />
+          </Route>
+          <Route exact path="/login-page">
             <Login handleSetCouple={handleSetCouple} />
           </Route>
-          <Route exact path="/signup">
+          <Route exact path="/signup-page">
             <Signup handleSetCouple={handleSetCouple} />
           </Route>
           <Route exact path="/">
@@ -55,6 +99,7 @@ function App() {
             </p>
           </Route>
         </Switch>
+        <Footer />
       </div>
     </BrowserRouter>
   );

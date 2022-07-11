@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 
-export default function Navbar({ image, handleLogout, isLoggedin }) {
+export default function Navbar({ handleLogout, isLoggedin, weather }) {
+  const { summary, temperature } = weather;
   const history = useHistory();
 
   const handleLogoutClick = async () => {
@@ -15,26 +16,9 @@ export default function Navbar({ image, handleLogout, isLoggedin }) {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="">
-          <img
-            src="https://bulma.io/images/bulma-logo.png"
-            width="112"
-            height="28"
-          />
-        </a>
-
-        <a
-          role="button"
-          className="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+          <img src="../../weretwologo1.png" width="85" height="auto" />
         </a>
       </div>
-
       <div className="navbar-menu">
         {isLoggedin ? (
           <>
@@ -45,8 +29,21 @@ export default function Navbar({ image, handleLogout, isLoggedin }) {
               <a className="navbar-item" href="event-page">
                 Date Ideas
               </a>
+              <a className="navbar-item" href="leaderboard-page">
+                Leaderboard
+              </a>
             </div>
             <div className="navbar-end">
+              {Object.keys(weather).length ? (
+                <>
+                  <div className="navbar-item">
+                    <p>{summary}</p>
+                  </div>
+                  <div className="navbar-item">
+                    <p>{Math.ceil(temperature)}ºF</p>
+                  </div>
+                </>
+              ) : null}
               <div className="navbar-item">
                 <a className="button is-light" onClick={handleLogoutClick}>
                   Log out
@@ -58,10 +55,10 @@ export default function Navbar({ image, handleLogout, isLoggedin }) {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-primary" href="/signup">
+                <a className="button is-primary" href="/signup-page">
                   <strong>Sign up</strong>
                 </a>
-                <a className="button is-light" href="/login">
+                <a className="button is-light" href="/login-page">
                   Log in
                 </a>
               </div>
