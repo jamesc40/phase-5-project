@@ -6,7 +6,8 @@ export default function CouplePage({ couple, handleHasBeen }) {
   const [dates, dispatch] = useReducer(reducer, []);
   const [showDates, setShowDates] = useState([]);
   const [toggleShow, setToggle] = useState(false);
-  const { name, completed_dates, image, leaderboard_position } = couple;
+  const { name, completed_dates, image, leaderboard_position, user_message } =
+    couple;
 
   const getDates = async () => {
     let req = await fetch("/date_nights");
@@ -31,11 +32,25 @@ export default function CouplePage({ couple, handleHasBeen }) {
 
   const handleSetToggle = () => setToggle((prev) => !prev);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let partnerMessage = document.querySelector("#partner-message");
     let form = new FormData(partnerMessage);
-    console.log(form.get("message"));
+
+    let options = {
+      method: "PATCH",
+      body: form,
+    };
+
+    let req = await fetch("/message", options);
+
+    //console.log(req.ok);
+
+    if (req.ok) {
+      let res = await req.json();
+      console.log(res);
+    }
+
     partnerMessage.reset();
   };
 
@@ -73,7 +88,9 @@ export default function CouplePage({ couple, handleHasBeen }) {
           </div>
           <form id="partner-message" onSubmit={handleSubmit}>
             <div className="field">
-              <label className="message">Couple Message</label>
+              <label className="message">
+                Say something nice to your partner!
+              </label>
               <div className="control">
                 <input
                   className="input mb-2"

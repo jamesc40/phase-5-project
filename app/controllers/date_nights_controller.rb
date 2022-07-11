@@ -6,7 +6,7 @@ class DateNightsController < ApplicationController
 
   def create
     date_night = current_couple.date_nights.create!(date_night_params)
-    render json: date_night, status: :created
+    head :created
   end
 
   def update

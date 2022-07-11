@@ -8,6 +8,8 @@ import CouplePage from "./CouplePage";
 import EventPage from "./EventPage";
 import Footer from "./Footer";
 
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
 const WEATHER_URL =
   "https://dark-sky.p.rapidapi.com/40.730610,-73.935242?exclude=minutely%2C%20flags&units=auto&lang=en";
 
@@ -52,14 +54,13 @@ function App() {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "1a3496aaadmshabfa4a975ae0e2dp180475jsnebf0df94f89f",
+        "X-RapidAPI-Key": API_KEY,
         "X-RapidAPI-Host": "dark-sky.p.rapidapi.com",
       },
     };
 
     let req = await fetch(WEATHER_URL, options);
     let res = await req.json();
-    //console.log(res);
 
     try {
       setWeather(res.currently);

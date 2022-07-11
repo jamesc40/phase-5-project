@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/validate-couple', to: 'couples#show'
 
+  patch '/message', to: 'users#message'
+
   get '*path',
       to: 'fallback#index',
       constraints: ->(req) { !req.xhr? && req.format.html? }

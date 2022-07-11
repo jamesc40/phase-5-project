@@ -7,12 +7,22 @@ class UsersController < ApplicationController
       Couple.create!(couple_params)
 
     user = couple.users.create!(user_params) 
+    session[:user_id] = user.id
     session[:couple_id] = user.couple.id
     render json: user.couple
   end
 
-  private
+  def message
+    other_user = current_user.get_other_user   
+    if other_user
+      other_user.update!(message_params) 
+      #message = other_user.message
+      render json: other_user
+    end
+  end
 
+  private
+  
   def user_params
     params.permit(:email, :password)
   end
@@ -20,4 +30,9 @@ class UsersController < ApplicationController
   def couple_params
     params.permit(:name, :image)
   end
+
+  def message_params
+    params.permit(:message)
+  end
+
 end

@@ -10,6 +10,10 @@ class ApplicationController < ActionController::API
   def current_couple
     Couple.find_by(id: session[:couple_id])
   end
+
+  def current_user
+    User.find_by(id: session[:user_id])
+  end
   
   private
 
