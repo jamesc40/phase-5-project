@@ -31,7 +31,7 @@ function App() {
     };
 
     getCouple();
-    //getWeather();
+    getWeather();
   }, []);
 
   const handleSetCouple = (fetchedCouple) => setCouple(fetchedCouple);
