@@ -3,18 +3,11 @@ export default function BasicEventCard({ event, handleLike }) {
   const { id, description, name, image } = event;
   return (
     <>
-      {/*<TinderCard*/}
-      {/*onSwipe={(dir) => handleSwipe(dir, event.id)}*/}
-      {/*preventSwipe={["up", "down"]}*/}
-      {/*>*/}
       <section className="section">
-        {/*<div className="block">*/}
         <figure id="events-page-figure">
           <img id="event-page-image" src={image} />
         </figure>
-        {/*</div>*/}
       </section>
-      {/*<section className="section">*/}
       <div className="columns is-centered">
         <div className="column is-narrow">
           <button

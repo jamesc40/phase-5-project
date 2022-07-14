@@ -1,11 +1,12 @@
 import { useEffect, useReducer, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
 import Login from "./Login";
 import Signup from "./Signup";
 import CouplePage from "./CouplePage";
 import EventPage from "./EventPage";
+import About from "./About";
 import Footer from "./Footer";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -31,8 +32,10 @@ function App() {
     };
 
     getCouple();
-    //getWeather();
+    getWeather();
   }, []);
+
+  const { pathname } = useLocation();
 
   const getWeather = async () => {
     const options = {
@@ -55,12 +58,14 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <>
+      {/*{pathname !== "/about" ? (*/}
       <Navbar
         isLoggedin={Object.keys(couple).length !== 0}
         dispatch={coupleDispatch}
         weather={weather}
       />
+      {/*) : null}*/}
       <div className="container">
         <Switch>
           <Route exact path="/event-page">
@@ -78,16 +83,16 @@ function App() {
           <Route exact path="/signup-page">
             <Signup dispatch={coupleDispatch} />
           </Route>
-          <Route exact path="/">
-            <h1 className="title">Hello World</h1>
-            <p className="subtitle">
-              My first website with <strong>Bulma</strong>!
-            </p>
+          <Route exact path="/about">
+            <About
+              isLoggedin={Object.keys(couple).length !== 0}
+              dispatch={coupleDispatch}
+            />
           </Route>
         </Switch>
         {/*<Footer />*/}
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 

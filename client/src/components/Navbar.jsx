@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 
-export default function Navbar({ dispatch, isLoggedin, weather }) {
-  const { summary, temperature } = weather;
+export default function Navbar({ dispatch, isLoggedin }) {
+  //const { summary, temperature } = weather;
   const history = useHistory();
 
   const handleLogoutClick = async () => {
@@ -15,7 +15,7 @@ export default function Navbar({ dispatch, isLoggedin, weather }) {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <a className="navbar-item" href="/about">
           <img src="../../weretwologo1.png" width="85" height="auto" />
         </a>
       </div>
@@ -55,7 +55,7 @@ export default function Navbar({ dispatch, isLoggedin, weather }) {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-primary" href="/signup-page">
+                <a className="button is-info" href="/signup-page">
                   <strong>Sign up</strong>
                 </a>
                 <a className="button is-light" href="/login-page">
