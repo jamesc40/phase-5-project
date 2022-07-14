@@ -1,5 +1,3 @@
-import TinderCard from "react-tinder-card";
-
 export default function BasicEventCard({ event, handleLike }) {
   //console.log(event);
   const { id, description, name, image } = event;
