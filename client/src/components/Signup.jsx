@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function Signup({ handleSetCouple }) {
+export default function Signup({ dispatch }) {
+  const [togglePic, setToggle] = useState(true);
   const [resErrors, setErrors] = useState([]);
   const history = useHistory();
 
@@ -19,7 +20,7 @@ export default function Signup({ handleSetCouple }) {
     if (req.ok) {
       setErrors([]);
       localStorage.setItem("loggedIn", JSON.stringify(true));
-      handleSetCouple(await req.json());
+      dispatch({ type: "load", payload: { couple: await req.json() } });
       history.push("/couple-page");
     } else {
       let { errors } = await req.json();
@@ -27,8 +28,21 @@ export default function Signup({ handleSetCouple }) {
     }
   };
 
+  const handleToggle = () => setToggle((prev) => !prev);
+
   return (
     <>
+      <div>
+        <input
+          id="signup-switch"
+          className="switch is-outlined is-info"
+          type="checkbox"
+          checked={togglePic}
+          onChange={handleToggle}
+        />
+        <label htmlFor="signup-switch">Joining your partner?</label>
+      </div>
+
       <form id="signup-form" onSubmit={handleSubmit}>
         <div className="field">
           <label className="label">Email</label>
@@ -74,18 +88,22 @@ export default function Signup({ handleSetCouple }) {
         {/*/>*/}
         {/*</div>*/}
         {/*</div>*/}
-        <div className="file has-name is-fullwidth mb-3">
-          <label className="file-label">
-            <input className="file-input" type="file" name="image" />
-            <span className="file-cta">
-              <span className="file-icon">
-                <i className="fas fa-upload"></i>
-              </span>
-              <span className="file-label">Choose a file…</span>
-            </span>
-            <span className="file-name">Couple Picture goes here cuh</span>
-          </label>
-        </div>
+        {!togglePic ? (
+          <>
+            <div className="file has-name is-fullwidth mb-3">
+              <label className="file-label">
+                <input className="file-input" type="file" name="image" />
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload"></i>
+                  </span>
+                  <span className="file-label">Choose a file…</span>
+                </span>
+                <span className="file-name">Couple Picture goes here cuh</span>
+              </label>
+            </div>
+          </>
+        ) : null}
         <div className="control">
           <button type="submit" className="button is-link">
             Submit

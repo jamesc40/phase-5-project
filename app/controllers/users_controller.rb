@@ -13,12 +13,18 @@ class UsersController < ApplicationController
   end
 
   def message
-    other_user = current_user.get_other_user   
-    if other_user
-      other_user.update!(message_params) 
-      #message = other_user.message
-      render json: other_user
+    message = params[:message]
+    if message
+      other_user = current_user.get_other_user   
+      if other_user
+        other_user.update!(message: message) 
+        head :accepted
+      end
+    else
+      current_user.update!(message: message)
+      head :no_content
     end
+
   end
 
   private
@@ -31,8 +37,8 @@ class UsersController < ApplicationController
     params.permit(:name, :image)
   end
 
-  def message_params
-    params.permit(:message)
-  end
+#  def message_params
+    #params.permit(:message)
+  #end
 
 end

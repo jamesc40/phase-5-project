@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function DateCard({ date, dispatch, handleHasBeen }) {
+export default function DateCard({ date, dispatch, coupleDispatch }) {
   const [toggleDescription, setToggle] = useState(false);
   const { id } = date;
   const URL = `/date_nights/${id}`;
@@ -18,7 +18,12 @@ export default function DateCard({ date, dispatch, handleHasBeen }) {
     }
 
     let leaderboardPosition = await req.json();
-    handleHasBeen(leaderboardPosition);
+
+    coupleDispatch({
+      type: "has been",
+      payload: { leaderboardPosition: leaderboardPosition },
+    });
+
     dispatch({ type: "update", payload: { id: id } });
   };
 
@@ -43,11 +48,17 @@ export default function DateCard({ date, dispatch, handleHasBeen }) {
       <div className="card-header">
         <p className="card-header-title">{name}</p>
       </div>
-      {toggleDescription ? (
-        <div className="card-content">
+      {!toggleDescription ? (
+        <div className="card-image event-image">
+          <figure className="image">
+            <img src={image} />
+          </figure>
+        </div>
+      ) : (
+        <div className="card-content event-description">
           <div className="content">{description}</div>
         </div>
-      ) : null}
+      )}
       <div className="card-footer">
         <a className="card-footer-item" onClick={handleToggle}>
           Learn More!
@@ -56,7 +67,7 @@ export default function DateCard({ date, dispatch, handleHasBeen }) {
           We've been!
         </a>
         <a className="card-footer-item" onClick={handleDelete}>
-          We're no longer interested
+          Nevermind!
         </a>
       </div>
     </div>

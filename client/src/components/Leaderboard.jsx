@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import EachPosition from "./EachPosition";
+import "./leaderboard.css";
 
 export default function Leaderboard() {
   const [leaderboardPositions, setLeaderboard] = useState([]);
@@ -18,10 +19,13 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <div className="list">
-      {leaderboardPositions.map((couple, index) => (
-        <EachPosition key={index} couple={couple} />
-      ))}
+    <div id="leaderboard-container">
+      <h1 className="title is-1">Leaderboard</h1>
+      <div className="list">
+        {leaderboardPositions.map((couple, index) => (
+          <EachPosition key={index} couple={couple} index={index} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,12 +1,7 @@
-#couple-page-image {
-  width: auto;
-  /*height: 748px;*/
-  /*height: 486px;*/
-}
-#event-page-image {
-  width: auto;
-  max-height: 486px;
-}
+/*#event-page-image {*/
+/*width: auto;*/
+/*max-height: 486px;*/
+/*}*/
 .leaderboard-images {
   max-width: 128px;
   width: auto;

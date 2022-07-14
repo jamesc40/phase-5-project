@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
@@ -14,7 +14,7 @@ const WEATHER_URL =
   "https://dark-sky.p.rapidapi.com/40.730610,-73.935242?exclude=minutely%2C%20flags&units=auto&lang=en";
 
 function App() {
-  const [couple, setCouple] = useState({});
+  const [couple, coupleDispatch] = useReducer(reducer, {});
   const [weather, setWeather] = useState({});
 
   useEffect(() => {
@@ -26,29 +26,13 @@ function App() {
 
       if (req.ok) {
         let res = await req.json();
-        setCouple(res);
+        coupleDispatch({ type: "load", payload: { couple: res } });
       }
     };
 
     getCouple();
-    getWeather();
+    //getWeather();
   }, []);
-
-  const handleSetCouple = (fetchedCouple) => setCouple(fetchedCouple);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setCouple({});
-  };
-
-  const handleHasBeen = (leaderboardPosition) => {
-    couple.completed_dates++;
-
-    setCouple({
-      ...couple,
-      leaderboard_position: leaderboardPosition,
-    });
-  };
 
   const getWeather = async () => {
     const options = {
@@ -63,6 +47,7 @@ function App() {
     let res = await req.json();
 
     try {
+      console.log(res.currently);
       setWeather(res.currently);
     } catch (err) {
       console.error(err);
@@ -73,25 +58,25 @@ function App() {
     <BrowserRouter>
       <Navbar
         isLoggedin={Object.keys(couple).length !== 0}
-        handleLogout={handleLogout}
+        dispatch={coupleDispatch}
         weather={weather}
       />
       <div className="container">
         <Switch>
           <Route exact path="/event-page">
-            <EventPage />
+            <EventPage weather={weather} />
           </Route>
           <Route exact path="/couple-page">
-            <CouplePage couple={couple} handleHasBeen={handleHasBeen} />
+            <CouplePage couple={couple} coupleDispatch={coupleDispatch} />
           </Route>
           <Route exact path="/leaderboard-page">
             <Leaderboard />
           </Route>
           <Route exact path="/login-page">
-            <Login handleSetCouple={handleSetCouple} />
+            <Login dispatch={coupleDispatch} />
           </Route>
           <Route exact path="/signup-page">
-            <Signup handleSetCouple={handleSetCouple} />
+            <Signup dispatch={coupleDispatch} />
           </Route>
           <Route exact path="/">
             <h1 className="title">Hello World</h1>
@@ -100,10 +85,30 @@ function App() {
             </p>
           </Route>
         </Switch>
-        <Footer />
+        {/*<Footer />*/}
       </div>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "load":
+      return action.payload.couple;
+    case "logout":
+      localStorage.clear();
+      return {};
+    case "has been":
+      return {
+        ...state,
+        completed_dates: state.completed_dates++,
+        leaderboard_position: action.payload.leaderboardPosition,
+      };
+    case "update message":
+      return { ...state, user_message: null };
+    default:
+      return state;
+  }
+}

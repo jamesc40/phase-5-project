@@ -1,7 +1,7 @@
 class LeaderboardSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :name, :image, :completed_dates
+  attributes :name, :image, :completed_dates, :leaderboard_position
 
   def image 
     if object.image.attached?

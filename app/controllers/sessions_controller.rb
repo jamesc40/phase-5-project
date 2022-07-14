@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session.delete :couple_id, :user_id
+    session.delete [:couple_id, :user_id]
     head :no_content
   end
 

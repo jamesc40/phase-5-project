@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./components/event-page.css";
 import "bulma/css/bulma.min.css";
 import "bulma-list/css/bulma-list.css";
+import "bulma-switch/dist/css/bulma-switch.min.css";
+import "bulma-pageloader/dist/css/bulma-pageloader.min.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 

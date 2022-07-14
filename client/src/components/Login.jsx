@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function Login({ handleSetCouple }) {
+export default function Login({ dispatch }) {
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -19,7 +19,7 @@ export default function Login({ handleSetCouple }) {
     if (req.ok) {
       setError("");
       localStorage.setItem("loggedIn", JSON.stringify(true));
-      handleSetCouple(await req.json());
+      dispatch({ type: "load", payload: { couple: await req.json() } });
       history.push("/couple-page");
     } else {
       let { error } = await req.json();

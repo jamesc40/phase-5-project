@@ -21,7 +21,7 @@ class Couple < ApplicationRecord
   end
 
   def self.leaderboard
-    Couple.all.sort_by { |couple| couple.date_nights.count }.reverse 
+    Couple.all.sort_by { |couple| couple.completed_dates }.reverse 
   end
 
 end

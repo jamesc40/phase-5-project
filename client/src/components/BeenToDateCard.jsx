@@ -53,18 +53,6 @@ export default function BeenToDateCard({ date, dispatch }) {
         <div className="modal-background"></div>
         <div className="modal-content">
           <form id={`review-form-${id}`} onSubmit={handleSubmit}>
-            <div className="rating">
-              <input name="rating" value={5} id={`e5-${id}`} type="radio" />
-              <label htmlFor={`e5-${id}`}>☆</label>
-              <input name="rating" value={4} id={`e4-${id}`} type="radio" />
-              <label htmlFor={`e4-${id}`}>☆</label>
-              <input name="rating" value={3} id={`e3-${id}`} type="radio" />
-              <label htmlFor={`e3-${id}`}>☆</label>
-              <input name="rating" value={2} id={`e2-${id}`} type="radio" />
-              <label htmlFor={`e2-${id}`}>☆</label>
-              <input name="rating" value={1} id={`e1-${id}`} type="radio" />
-              <label htmlFor={`e1-${id}`}>☆</label>
-            </div>
             <div className="field">
               <div className="control is-medium is-loading">
                 <textarea
@@ -72,6 +60,18 @@ export default function BeenToDateCard({ date, dispatch }) {
                   placeholder="Medium loading textarea"
                   name="content"
                 ></textarea>
+                <div className="rating">
+                  <input name="rating" value={5} id={`e5-${id}`} type="radio" />
+                  <label htmlFor={`e5-${id}`}>☆</label>
+                  <input name="rating" value={4} id={`e4-${id}`} type="radio" />
+                  <label htmlFor={`e4-${id}`}>☆</label>
+                  <input name="rating" value={3} id={`e3-${id}`} type="radio" />
+                  <label htmlFor={`e3-${id}`}>☆</label>
+                  <input name="rating" value={2} id={`e2-${id}`} type="radio" />
+                  <label htmlFor={`e2-${id}`}>☆</label>
+                  <input name="rating" value={1} id={`e1-${id}`} type="radio" />
+                  <label htmlFor={`e1-${id}`}>☆</label>
+                </div>
                 <button
                   className="button is-link is-outlined mt-2 is-fullwidth"
                   type="submit"
