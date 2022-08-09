@@ -7,7 +7,6 @@ export default function CouplePage({ couple, coupleDispatch }) {
   const [dates, dispatch] = useReducer(reducer, []);
   const [showDates, setShowDates] = useState([]);
   const [toggleShow, setToggle] = useState(false);
-  //const [messageModal, setModal] = useState(false);
   const { name, completed_dates, image, leaderboard_position, user_message } =
     couple;
 
@@ -25,7 +24,6 @@ export default function CouplePage({ couple, coupleDispatch }) {
   }, []);
 
   useEffect(() => {
-    //if (user_message) setModal(true);
     const filteredDates = dates.filter((el) => el.has_been === toggleShow);
     if (toggleShow === false && filteredDates.length === 0) {
       handleSetToggle();
@@ -68,18 +66,6 @@ export default function CouplePage({ couple, coupleDispatch }) {
 
   return (
     <>
-      {/*<div className={messageModal ? "modal is-active" : "modal"}>*/}
-      {/*<div className="modal-background"></div>*/}
-      {/*<div className="modal-content">*/}
-      {/*<div className="notification">{user_message}</div>*/}
-      {/*</div>*/}
-      {/*<button*/}
-      {/*className="modal-close is-large"*/}
-      {/*aria-label="close"*/}
-      {/*onClick={handleModal}*/}
-      {/*></button>*/}
-      {/*</div>*/}
-
       <div className="columns is-vcentered">
         <div className="box mt-2">
           <div className="column">

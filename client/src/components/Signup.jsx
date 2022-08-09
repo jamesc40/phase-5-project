@@ -77,17 +77,6 @@ export default function Signup({ dispatch }) {
             />
           </div>
         </div>
-        {/*<div className="field">*/}
-        {/*<label className="label">Couple Picture</label>*/}
-        {/*<div className="control">*/}
-        {/*<input*/}
-        {/*className="input"*/}
-        {/*name="image"*/}
-        {/*type="file"*/}
-        {/*accept="image/png, image/jpg, image/gif, image/jpeg"*/}
-        {/*/>*/}
-        {/*</div>*/}
-        {/*</div>*/}
         {!togglePic ? (
           <>
             <div className="file has-name is-fullwidth mb-3">

@@ -1,7 +1,6 @@
 import { useHistory } from "react-router-dom";
 
 export default function Navbar({ dispatch, isLoggedin }) {
-  //const { summary, temperature } = weather;
   const history = useHistory();
 
   const handleLogoutClick = async () => {
@@ -34,16 +33,6 @@ export default function Navbar({ dispatch, isLoggedin }) {
               </a>
             </div>
             <div className="navbar-end">
-              {/*{Object.keys(weather).length ? (*/}
-              {/*<>*/}
-              {/*<div className="navbar-item">*/}
-              {/*<p>{summary}</p>*/}
-              {/*</div>*/}
-              {/*<div className="navbar-item">*/}
-              {/*<p>{Math.ceil(temperature)}ºF</p>*/}
-              {/*</div>*/}
-              {/*</>*/}
-              {/*) : null}*/}
               <div className="navbar-item">
                 <a className="button is-light" onClick={handleLogoutClick}>
                   Log out

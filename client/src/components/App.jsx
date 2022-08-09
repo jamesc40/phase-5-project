@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Redirect, Route, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
 import Login from "./Login";
@@ -7,7 +7,6 @@ import Signup from "./Signup";
 import CouplePage from "./CouplePage";
 import EventPage from "./EventPage";
 import About from "./About";
-import Footer from "./Footer";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -18,7 +17,6 @@ function App() {
   const [couple, coupleDispatch] = useReducer(reducer, {});
   const [weather, setWeather] = useState({});
 
-  console.log(WEATHER_URL);
   useEffect(() => {
     let loggedIn = localStorage.getItem("loggedIn");
     if (!loggedIn) return;
@@ -35,8 +33,6 @@ function App() {
     getCouple();
     //getWeather();
   }, []);
-
-  const { pathname } = useLocation();
 
   const getWeather = async () => {
     const options = {
@@ -87,6 +83,9 @@ function App() {
               isLoggedin={Object.keys(couple).length !== 0}
               dispatch={coupleDispatch}
             />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/about" />
           </Route>
         </Switch>
       </div>

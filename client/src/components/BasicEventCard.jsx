@@ -1,5 +1,4 @@
 export default function BasicEventCard({ event, handleLike }) {
-  //console.log(event);
   const { id, description, name, image } = event;
   return (
     <>
@@ -15,14 +14,7 @@ export default function BasicEventCard({ event, handleLike }) {
             name="like"
             onClick={handleLike}
           >
-            {/*<span*/}
-            {/*role="img"*/}
-            {/*aria-label="smiling face with heart-eyes"*/}
-            {/*class="react-emojis"*/}
-            {/*style={{ "line-height": 1 }}*/}
-            {/*>*/}
             😍
-            {/*</span>*/}
           </button>
         </div>
         <div className="column is-narrow">
@@ -31,27 +23,14 @@ export default function BasicEventCard({ event, handleLike }) {
             name="disslike"
             onClick={handleLike}
           >
-            {/*<span*/}
-            {/*role="img"*/}
-            {/*aria-label="broken heart"*/}
-            {/*class="react-emojis"*/}
-            {/*style={{ "line-height": 1 }}*/}
-            {/*>*/}
             💔
-            {/*</span>*/}
           </button>
         </div>
       </div>
-      {/*</section>*/}
       <section className="section">
-        {/*</TinderCard>*/}
-
-        {/*<div className="block">*/}
         <div className="content is-medium">
-          {/*<h1>{name}</h1>*/}
           <p>{description}</p>
         </div>
-        {/*</div>*/}
       </section>
     </>
   );

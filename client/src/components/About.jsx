@@ -25,9 +25,6 @@ export default function Home({ isLoggedin, dispatch }) {
       <div className="is-family-code">
         <section className="section">
           <h1 className="title is-1">Welcome to We'reTwo</h1>
-          {/*<Navbar isLoggedin={isLoggedin} dispatch={dispatch} />*/}
-
-          {/*<div className="about-title-container"></div>*/}
           <Slider {...settings}>
             {pictures?.map((picture, i) => (
               <div key={i}>
@@ -39,20 +36,12 @@ export default function Home({ isLoggedin, dispatch }) {
           </Slider>
         </section>
         <section className="section">
-          {/*<div className="columns is-centered is-vcentered">*/}
-          {/*<div className="column is-narrow">*/}
-          {/*<figure>*/}
-          {/*<img src="../../weretwoabout.png" />*/}
-          {/*</figure>*/}
-          {/*</div>*/}
-
           <div className="content">
             <h5>
               Here at We'reTwo our mission is to help couples find dates so they
               can spend less time planning and more time with their partner.
             </h5>
           </div>
-
           <figure className="has-text-centered">
             <img src="../../weretwoabout.png" />
           </figure>

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import BasicEventCard from "./BasicEventCard";
-import EventCard from "./EventCard";
-import Review from "./Review";
 import "./event-page.css";
 
 export default function EventPage({ weather }) {
