@@ -18,6 +18,7 @@ function App() {
   const [couple, coupleDispatch] = useReducer(reducer, {});
   const [weather, setWeather] = useState({});
 
+  console.log(WEATHER_URL);
   useEffect(() => {
     let loggedIn = localStorage.getItem("loggedIn");
     if (!loggedIn) return;
@@ -32,7 +33,7 @@ function App() {
     };
 
     getCouple();
-    getWeather();
+    //getWeather();
   }, []);
 
   const { pathname } = useLocation();
@@ -59,13 +60,11 @@ function App() {
 
   return (
     <>
-      {/*{pathname !== "/about" ? (*/}
       <Navbar
         isLoggedin={Object.keys(couple).length !== 0}
         dispatch={coupleDispatch}
         weather={weather}
       />
-      {/*) : null}*/}
       <div className="container">
         <Switch>
           <Route exact path="/event-page">
@@ -90,7 +89,6 @@ function App() {
             />
           </Route>
         </Switch>
-        {/*<Footer />*/}
       </div>
     </>
   );

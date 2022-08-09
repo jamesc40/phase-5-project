@@ -45,7 +45,6 @@ export default function EventPage({ weather }) {
   };
 
   const handleLike = (event) => {
-    console.log(event.target.name);
     switch (event.target.name) {
       case "like":
         handleNewDateNight(true);
@@ -61,6 +60,7 @@ export default function EventPage({ weather }) {
   //const handleReviewToggle = () => setToggle((prev) => !prev);
 
   const { summary, temperature } = weather;
+  console.log(weather);
 
   return (
     <>
@@ -68,9 +68,13 @@ export default function EventPage({ weather }) {
         <>
           <section className="hero">
             <div className="hero-body">
-              <p className="title">
-                Todays Forcast is {summary} and {Math.ceil(temperature)}ºF
-              </p>
+              {Object.keys(weather).length > 0 ? (
+                <p className="title">
+                  Todays Forcast is {summary} and {Math.ceil(temperature)}ºF
+                </p>
+              ) : (
+                <p className="title">Todays Forcast is sunny and 68 ºF</p>
+              )}
               <p className="subtitle">{activeEvent.intro}</p>
             </div>
           </section>
@@ -86,37 +90,6 @@ export default function EventPage({ weather }) {
           </div>
         </section>
       )}
-      {/*{events && events.length > 0 ? (*/}
-      {/*<>*/}
-      {/*<div id="event-root">*/}
-      {/*<div>*/}
-      {/*<div className="eventCardContainer">*/}
-      {/*{events.map((event, i) => {*/}
-      {/*return (*/}
-      {/*<TinderCard*/}
-      {/*key={event.id}*/}
-      {/*onSwipe={(dir) => handleSwipe(dir, event.id, i)}*/}
-      {/*preventSwipe={["up", "down"]}*/}
-      {/*>*/}
-      {/*<EventCard event={event} />*/}
-      {/*</TinderCard>*/}
-      {/*);*/}
-      {/*})}*/}
-      {/*</div>*/}
-      {/*</div>*/}
-      {/*</div>*/}
-      {/*<div className="has-text-centered my-2">*/}
-      {/*<button className="button is-text" onClick={handleReviewToggle}>*/}
-      {/*{toggleReviews ? "Hide Reviews" : "See Reviews"}*/}
-      {/*</button>*/}
-      {/*</div>*/}
-      {/*{toggleReviews*/}
-      {/*? events[0].reviews.map((review) => (*/}
-      {/*<Review key={review.id} review={review} />*/}
-      {/*))*/}
-      {/*: null}*/}
-      {/*</>*/}
-      {/*) : null}*/}
     </>
   );
 }
